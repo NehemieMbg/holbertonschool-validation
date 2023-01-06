@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Installation of Go-Hugo and Make command
