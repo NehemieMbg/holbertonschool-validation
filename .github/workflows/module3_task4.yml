@@ -1,0 +1,52 @@
+---
+name: module3_task4
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "* 23 * * *"
+  pull_request:
+jobs:
+  module3_task4_make_build_workflow:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout the build target
+        uses: actions/checkout@v3
+      - name: Setting hugo and build
+        run: |
+          cd module3_task4
+          ./setup.sh
+      - name: lint
+        run: |
+          cd module3_task4
+          make lint
+      - name: build
+        run: |
+          cd module3_task4
+          make build
+      - name: post
+        run: |
+          cd module3_task4
+          make POST_TITLE=TestRelease POST_NAME='TestSuccessRelease' post
+      - name: integration testing
+        run: |
+          cd module3_task4
+          make validate
+          make integration-tests
+          make unit-tests
+          make package
+          make clean
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: 1.0.1
+          files: |
+            module3_task4/awesome-website.zip
+            module3_task4/DEPLOY.md
+      - name: build the archive
+        if: ${{ success()}}
+        uses: actions/upload-artifact@v3
+        with:
+          name: build package
+          path: module3_task4/awesome-website.zip
