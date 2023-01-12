@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
   schedule:
-    # * is a special character in YAML so you have to quote this string
+    # * is a special character in YAML so you have to quote this string.
     - cron: "* 23 * * *"
 jobs:
   Explore-GitHub-Actions:
@@ -13,5 +13,5 @@ jobs:
         uses: actions/checkout@v3
       - name: display help
         run: |
-        cd module3_task0
-        make help
+          cd module3_task0
+          make help
