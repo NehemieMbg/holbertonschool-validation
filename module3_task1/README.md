@@ -2,7 +2,7 @@
 
 ## **LEARNINGS**
 
-- Understand the value of automating tedious tasks
+- Understand the value of automating tedious taskss
 - Define a development lifecycle
 - Automate shell-like tasks with Make, and/or shell script
 - Be aware of tools dependencies and the value of reproducing environment
