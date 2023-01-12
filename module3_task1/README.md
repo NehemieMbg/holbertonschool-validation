@@ -24,3 +24,15 @@
 - post: Create a new blog post whose filename and title come from the
   environment variables `POST_TITLE` and `POST_NAME`.
 - help: Display the documentation of all targets
+
+## **HELP Workflow**
+
+- Triggering the workflow, each time new code is pushed to the repo, or at least once per day.
+- In this directory, we're going to configure automatic actions to be performed when something happen to the repository.
+- Using Github Actions to ensure CI/CL pipeline (build starts, TEST, BUILD, PUSH, DEPLOY)
+
+==> help workflow test that help gets displayed
+
+## **BUILD Workflow**
+
+Fixing code in order to make the build command valid with github actions
