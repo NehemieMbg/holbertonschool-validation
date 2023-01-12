@@ -1,4 +1,4 @@
-# **DEPLOYMENT DOCUMENT FOR MY DEAR TEAMMATES**
+# **DEPLOYMENT DOCUMENT**
 
 ## - What is in the archive and how to unarchive it?\*
 
@@ -24,4 +24,4 @@ pointing to the tag 1.0.0
 ## Release Drafter
 
 Automate the creation of a changelog for the release,
-based on the merge pull request title
+based on the merge pull request title.
