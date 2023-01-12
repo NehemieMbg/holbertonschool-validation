@@ -1,5 +1,5 @@
 ---
-name: module3_task1
+name: module3_task2
 on:
   push:
     branches:
@@ -10,27 +10,31 @@ on:
     - cron: "30 10 * * *"
 
 jobs:
-  module3_task1_make_build_workflow:
+  module3_task2_make_build_workflow:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout the build target
         uses: actions/checkout@v3
-      - name: running
+      - name: Setting hugo and build
         run: |
-          cd module3_task1
+          cd module3_task2
           ./setup.sh
       - name: lint
         run: |
-          cd module3_task1
+          cd module3_task2
           make lint
       - name: build
         run: |
-          cd module3_task1
+          cd module3_task2
           make build
       - name: post
         run: |
           cd module3_task2
           make POST_TITLE=Test POST_NAME='TestSuccess' post
+      - name: Unit testing
+        run: |
+          cd module3_task2
+          make unit-tests
       - name: integration testing
         run: |
           cd module3_task2
@@ -39,10 +43,10 @@ jobs:
           make unit-tests
           make package
           make clean
-      - name: Unit testing
-        run: |
-          cd module3_task1
-          make unit-tests
-      - name: integration testing
-        run: |
-          cd module3_task1
+      - name: build the archive
+        # if none of previous steps have failed, success returns true
+        if: ${{ success()}}
+        uses: actions/upload-artifact@v3
+        with:
+          name: build package
+          path: module3_task2/awesome-website.zip
