@@ -1,0 +1,45 @@
+name: module3_task1
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # * is a special character in YAML so you have to quote this string.
+    - cron: "* 23 * * *"
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: display help
+        run: |
+          cd module3_task1
+          ./setup.sh
+      - name: lint
+        run: |
+          cd module3_task1
+          make lint
+      - name: build
+        run: |
+          cd module3_task1
+          make build
+      - name: post
+        run: |
+          cd module3_task2
+          make POST_TITLE=Test POST_NAME='TestSuccess' post
+      - name: integration testing
+        run: |
+          cd module3_task2
+          make validate
+          make integration-tests
+          make unit-tests
+          make package
+          make clean
+      - name: Unit testing
+        run: |
+          cd module3_task1
+          make unit-tests
+      - name: integration testing
+        run: |
+          cd module3_task1
