@@ -13,9 +13,9 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: running
-        run: |
-          cd module3_task1
-          ./setup.sh
+        # run: |
+        #   cd module3_task1
+        #   ./setup.sh
       - name: build
         run: |
           cd module3_task1
