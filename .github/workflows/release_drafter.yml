@@ -1,0 +1,27 @@
+name: release_drafter
+on:
+  push:
+    branches: main
+  # pull request event is required
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  update_release_draft:
+    permissions:
+      # write permission is required to create a github release
+      contents: write
+      # write permission required for auto-labeller
+      # otherwise, read 'chmod' at least
+      pull-requests: write
+    runs-on: ubuntu-18.04
+    steps:
+      # Drafts your next release notes as pull requests
+      - uses: release-drafter/release-drafter@v5
+        with:
+          publish: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
