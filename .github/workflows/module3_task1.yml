@@ -1,24 +1,18 @@
----
 name: module3_task1
 on:
   push:
     branches:
       - main
   schedule:
-    # * is special character quote it!
-    - cron: "* 10 * * *"
-
+    # * is a special character in YAML so you have to quote this string.
+    - cron: "* 23 * * *"
 jobs:
-  module3_task1_make_build_workflow:
+  Explore-GitHub-Actions:
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout the build target
+      - name: Check out repository code
         uses: actions/checkout@v3
-      - name: running
-        run: |
-          cd module3_task1
-          ./setup.sh
-      - name: lint
+      - name: run
         run: |
           cd module3_task1
           make lint
@@ -26,22 +20,3 @@ jobs:
         run: |
           cd module3_task1
           make build
-      - name: post
-        run: |
-          cd module3_task2
-          make POST_TITLE=Test POST_NAME='TestSuccess' post
-      - name: integration testing
-        run: |
-          cd module3_task2
-          make validate
-          make integration-tests
-          make unit-tests
-          make package
-          make clean
-      - name: Unit testing
-        run: |
-          cd module3_task1
-          make unit-tests
-      - name: integration testing
-        run: |
-          cd module3_task1
