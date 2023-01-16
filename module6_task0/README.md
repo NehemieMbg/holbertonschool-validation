@@ -1,21 +1,34 @@
-# **Using Jenkins for CI/CD Pipelines**
+# **Jenkins Docker Image**
 
-## **Learnings**
+This repository contains a Dockerfile for building a custom Jenkins image with the following features:
 
-**_This project aims at learning how to use Jenkins, the open source automation server, to implement a CI/CD process._**
+- Inherits from the latest Jenkins Long-Term Support (LTS) version
+- Includes Java Development Toolkit (JDK) version 11
+- Disables the Jenkins setup wizard
+- Installs a set of pre-defined plugins
 
-- Understand the benefits and limits of using Jenkins to implement a CI/CD process
-- Manage a Jenkins Controller instance with a full Infrastructure as Code setup
-- Write a Pipeline as code with a Jenkinsfile , using the declarative syntax, to integrate with a GitHub repository
-- Understand the pros and cons of managing a service yourself vs. using an hosted service
+## **Usage**
 
-### **_Prerequisites_**
+To build the image, run the following command in the root of this repository:
 
-- Basic concepts of Jenkins: jobs, builds, agents
-- Understanding of what an HTTP Web Service is and how to run it on Linux (systemctl/services)
+`docker build -t my-jenkins`
 
-### **_Tooling_**
+You can then run a container from the image with:
 
-- Docker should be installed on your machine.
-- Docker Compose should be installed.
-- OpenSSH Client
+docker run -p 8080:8080 -p 50000:50000 my-jenkins
+
+This will start a Jenkins instance on port 8080 of your Docker host. You can access it by visiting http://hostname:8080 in a web browser.
+
+## **Configuration**
+
+The set of pre-installed plugins and their versions are defined in the plugins.txt file. You can edit this file to add or remove plugins before building the image.
+
+To disable the Jenkins setup wizard, the environment variable `JAVA_OPTS` is set to `-Djenkins.install.runSetupWizard=false`
+
+## **Testing**
+
+The Docker image can be tested using Container Structure Test (CST) by running the following command in the root of this repository:
+
+`container-structure-test test --image my-jenkins --config cst.yml``
+
+This command will run the test
