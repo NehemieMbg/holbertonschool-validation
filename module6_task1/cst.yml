@@ -1,0 +1,28 @@
+---
+schemaVersion: "2.0.0"
+test:
+  - name: Check for authentication
+    command: |
+      curl --silent http://localhost:8080 --write-out '%{http_code}' --output /dev/null
+    expectedOutput:
+      - 403
+  - name: Check for jenkins-admin login
+    command: |
+      curl --silent http://localhost:8080 --write-out '%{http_code}' --output /dev/null --user 'jenkins-admin:butler'
+    expectedOutput:
+      - 200
+  - name: Check for devops login
+    command: |
+      curl --silent http://localhost:8080 --write-out '%{http_code}' --output /dev/null --user 'devops:cicdsecret'
+    expectedOutput:
+      - 200
+  - name: Check for jenkins-admin management access
+    command: |
+      curl --silent http://localhost:8080/manage --write-out '%{http_code}' --output /dev/null --user 'jenkins-admin:butler'
+    expectedOutput:
+      - 200
+  - name: Check for devops management access
+    command: |
+      curl --silent http://localhost:8080/manage --write-out '%{http_code}' --output /dev/null --user 'devops:cicdsecret'
+    expectedOutput:
+      - 403
