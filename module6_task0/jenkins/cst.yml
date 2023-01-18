@@ -1,11 +1,22 @@
 ---
 schemaVersion: "2.0.0"
-testCases:
-  - name: "Check plugins"
-    description: "Check that the plugins defined in plugins.txt are present"
-    fileExists:
-      - path: "/usr/share/jenkins/ref/plugins/git.jpi"
-      - path: "/usr/share/jenkins/ref/plugins/blueocean.jpi"
-      - path: "/usr/share/jenkins/ref/plugins/pipeline-stage-view.jpi"
-  - name: "Check java version"
-    description: "Check that the command line java reports version 11"
+
+test:
+  - name: "Plugins are present and correctly installed"
+    command:
+      - "sh"
+      - "-c"
+      - |
+        for plugin in $(cat /usr/share/jenkins/ref/plugins/plugins.txt); do
+          if ! ls /usr/share/jenkins/ref/plugins/ | grep -q $plugin; then
+            echo "Plugin $plugin not found"
+            exit 1
+          fi
+        done
+        echo "All plugins are present"
+  - name: "Java version is 11"
+    command:
+      - "java"
+      - "-version"
+    expectedOutput:
+      - 'version "11'
