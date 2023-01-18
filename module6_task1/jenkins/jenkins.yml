@@ -6,9 +6,9 @@ unclassified:
         allowsSignup: false
         users:
           - id: jenkins-admin
-            password: '{CRYPT}$2y$05$6dJpwLr5f5W8jv.n1nF5h.9zd5WYbv2z6hA5w3qgJtZ2l7ZoD9gqK'
+            password: "{CRYPT}$2y$05$6dJpwLr5f5W8jv.n1nF5h.9zd5WYbv2z6hA5w3qgJtZ2l7ZoD9gqK"
             fullName: Jenkins Admin
             permissions:
               - hudson.model.Hudson.Administer
           - id: devops
-            password: '{CRYPT}$2
+            password: "{CRYPT}$2y$05$6dJpwLr5f5W8jv.n1nF5h.9zd5WYbv2z6hA5w3qgJtZ2l7ZoD9gqK"

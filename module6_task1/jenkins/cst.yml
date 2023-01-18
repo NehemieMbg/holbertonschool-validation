@@ -3,7 +3,8 @@ schemaVersion: "2.0.0"
 test:
   - name: Check for authentication
     command: |
-      curl --silent http://localhost:8080 --write-out '%{http_code}' --output /dev/null
+      curl --silent http://localhost:8080 --write-out\
+       '%{http_code}' --output /dev/null
     expectedOutput:
       - 403
   - name: Check for jenkins-admin login
