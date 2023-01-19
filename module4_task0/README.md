@@ -1,46 +1,49 @@
-# **Introduction to DevOps\_\_Automate everything to Focus on what really matters**
+# **README**
 
-## **LEARNINGS**
+## **Introduction**
 
-- Understand the value of automating tedious tasks
-- Define a development lifecycle
-- Automate shell-like tasks with Make, and/or shell script
-- Be aware of tools dependencies and the value of reproducing environment
-- Build static HTML website from Markdown code using Go-Hugo
+This project aims to provide a consistent development environment for all team members using Docker. The official Golang Docker Image (golang:1.15.8-buster) will be used for the steps of building, unit-testing, and integration-testing. This will ensure that the build environment is deterministic and the same for all team members, regardless of their operating system.
 
-## **Prerequisites**
+## **Getting Started**
 
-- Install Go-Hugo to produce a valid Go-Hugo Website
-- No Git Submodules allowed
-- No directory `dist/` committed
-- A Ubuntu system
-- Usage of a Makefile to ease Lifecycle
-- The website created has to use the theme 'ananke'
+To get started, you will need to have Docker installed on your machine. If you are using GitHub Actions, Docker is already installed on the runners, so there is no need to install it again.
 
-## **Lifecycle**
+You will also need to have the following tools installed:
 
-- build: Generate the website from the markdown and configuration files
-  in the directory `dist/`.
-- clean: Cleanup the content of the directory `dist/`
-- post: Create a new blog post whose filename and title come from the
-  environment variables `POST_TITLE` and `POST_NAME`.
-- help: Display the documentation of all targets
-- unit-tests: Runs several make command, expected correct output
-- integration-tests: runs post and build to check for proper integration of new posts
-- validate: validate that we are in the correct folder
-- package: compress archive `awesome-website.zip`
+- Hugo
+- Golangclint
 
-## **HELP Workflow**
+Golang should not be installed, as it will be handled through the Docker image.
 
-- Triggering the workflow, each time new code is pushed to the repo,
-  or at least once per day.
-- In this directory, we're going to configure automatic actions
-  to be performed when something happen to the repository.
-- Using Github Actions to ensure CI/CL pipeline
-  (build starts, TEST, BUILD, PUSH, DEPLOY)
+## **Makefile Targets**
 
-==> help workflow test that help gets displayed
+The Makefile contains the following targets:
 
-## **BUILD Workflow**
+- **`build`**: This target is responsible for building the Golang and Hugo portions of the project. The Golang build will be done using the Docker image golang:1.15.8-buster, while the Hugo build will be done using the locally installed version of Hugo.
 
-Fixing code in order to make the build command valid with github actions
+- **`unit-tests`**: This target is responsible for running the unit tests of the project. It will use the Docker image golang:1.15.8-buster to run the tests in a consistent environment.
+
+- **`integration-tests`**: This target is responsible for running the integration tests of the project. It will also use the Docker image golang:1.15.8-buster to run the tests in a consistent environment.
+
+## **Code Coverage Reports**
+
+The behavior of the code coverage reports will remain the same. The reports will be available after running the unit-tests and integration-tests targets.
+
+## **GitHub Actions Workflow**
+
+The file **`.github/workflows/module4_task0.yml`** must be present and have a valid YAML syntax. It should be a valid GitHub action workflow with the same content as from the **`module3_task5`**.
+
+## **Requirements**
+
+The project requires the following:
+
+- A valid Go-Hugo website provided
+- No Git submodules
+- The theme 'ananke' is installed
+- A Makefile with the same targets, including 'help'
+- An up-to-date README.md file with the project state
+- The file **`./github-workflow.yml`** must be a symbolic link to the original file **`.github/workflows/module4_task0.yml`**
+
+## **Conclusion**
+
+By using Docker to provide a consistent development environment, this project aims to make onboarding new team members and managing different operating systems easier. The use of the official Golang Docker Image (golang:1.15.8-buster) ensures that the build environment is deterministic and the same for all team members. This should help to reduce issues caused by differences in operating systems and package managers.
